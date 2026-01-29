@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ticketArea"
+        android:layout_width="400dp"
+        android:layout_height="650dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="2:3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <!-- ВЕРТИКАЛЬНЫЕ Guidelines ДЛЯ ОТСТУПОВ СЛЕВА/СПРАВА -->
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.83" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_85"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <!-- ГОРИЗОНТАЛЬНЫЕ Guidelines ДЛЯ 5 БИЛЕТОВ -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_top_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.009" />
+
+        <!-- Guideline для первого билета -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_ticket1_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_ticket1_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <!-- Guideline для второго билета -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_ticket2_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.30" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_ticket2_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.40" />
+
+        <!-- Guideline для третьего билета -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_ticket3_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.45" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_ticket3_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.55" />
+
+        <!-- Guideline для четвертого билета -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_ticket4_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.60" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_ticket4_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.70" />
+
+        <!-- Guideline для пятого билета -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_ticket5_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.75" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_ticket5_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85" />
+
+        <!-- БИЛЕТ 1 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ticket1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="8dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="3dp"
+            app:layout_constraintBottom_toTopOf="@id/guideline_ticket1_bottom"
+            app:layout_constraintEnd_toStartOf="@id/guideline_85"
+            app:layout_constraintStart_toStartOf="@id/guideline_5"
+            app:layout_constraintTop_toTopOf="@id/guideline_ticket1_top">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_input_code"
+                android:padding="12dp">
+
+                <!-- Иконка билета слева -->
+                <ImageView
+                    android:id="@+id/ivTicketIcon1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ticket"
+                    android:tint="#9C27B0"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Количество билетов справа -->
+                <TextView
+                    android:id="@+id/tvCount1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 шт."
+                    android:textColor="#E9E7E7"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Номер автобуса (первая строка) -->
+                <TextView
+                    android:id="@+id/tvBusNumber1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="Автобус №123"
+                    android:textColor="#E9E7E7"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tvCount1"
+                    app:layout_constraintStart_toEndOf="@id/ivTicketIcon1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Время покупки (вторая строка) -->
+                <TextView
+                    android:id="@+id/tvPurchaseTime1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="12:30 25.12.2023"
+                    android:textColor="#E9E7E7"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tvCount1"
+                    app:layout_constraintStart_toEndOf="@id/ivTicketIcon1"
+                    app:layout_constraintTop_toBottomOf="@id/tvBusNumber1" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- БИЛЕТ 2 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ticket2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="8dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="3dp"
+            app:layout_constraintBottom_toTopOf="@id/guideline_ticket2_bottom"
+            app:layout_constraintEnd_toStartOf="@id/guideline_85"
+            app:layout_constraintStart_toStartOf="@id/guideline_5"
+            app:layout_constraintTop_toTopOf="@id/guideline_ticket2_top">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_input_code"
+                android:padding="12dp">
+
+                <!-- Иконка билета слева -->
+                <ImageView
+                    android:id="@+id/ivTicketIcon2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ticket"
+                    android:tint="#9C27B0"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Количество билетов справа -->
+                <TextView
+                    android:id="@+id/tvCount2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 шт."
+                    android:textColor="#E9E7E7"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Номер автобуса (первая строка) -->
+                <TextView
+                    android:id="@+id/tvBusNumber2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="Автобус №456"
+                    android:textColor="#E9E7E7"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tvCount2"
+                    app:layout_constraintStart_toEndOf="@id/ivTicketIcon2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Время покупки (вторая строка) -->
+                <TextView
+                    android:id="@+id/tvPurchaseTime2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="14:45 25.12.2023"
+                    android:textColor="#E9E7E7"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tvCount2"
+                    app:layout_constraintStart_toEndOf="@id/ivTicketIcon2"
+                    app:layout_constraintTop_toBottomOf="@id/tvBusNumber2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- БИЛЕТ 3 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ticket3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="8dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="3dp"
+            app:layout_constraintBottom_toTopOf="@id/guideline_ticket3_bottom"
+            app:layout_constraintEnd_toStartOf="@id/guideline_85"
+            app:layout_constraintStart_toStartOf="@id/guideline_5"
+            app:layout_constraintTop_toTopOf="@id/guideline_ticket3_top">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_input_code"
+                android:padding="12dp">
+
+                <!-- Иконка билета слева -->
+                <ImageView
+                    android:id="@+id/ivTicketIcon3"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ticket"
+                    android:tint="#9C27B0"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Количество билетов справа -->
+                <TextView
+                    android:id="@+id/tvCount3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 шт."
+                    android:textColor="#E9E7E7"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Номер автобуса (первая строка) -->
+                <TextView
+                    android:id="@+id/tvBusNumber3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="Автобус №789"
+                    android:textColor="#E9E7E7"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tvCount3"
+                    app:layout_constraintStart_toEndOf="@id/ivTicketIcon3"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Время покупки (вторая строка) -->
+                <TextView
+                    android:id="@+id/tvPurchaseTime3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="16:20 25.12.2023"
+                    android:textColor="#E9E7E7"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tvCount3"
+                    app:layout_constraintStart_toEndOf="@id/ivTicketIcon3"
+                    app:layout_constraintTop_toBottomOf="@id/tvBusNumber3" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- БИЛЕТ 4 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ticket4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="8dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="3dp"
+            app:layout_constraintBottom_toTopOf="@id/guideline_ticket4_bottom"
+            app:layout_constraintEnd_toStartOf="@id/guideline_85"
+            app:layout_constraintStart_toStartOf="@id/guideline_5"
+            app:layout_constraintTop_toTopOf="@id/guideline_ticket4_top">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_input_code"
+                android:padding="12dp">
+
+                <!-- Иконка билета слева -->
+                <ImageView
+                    android:id="@+id/ivTicketIcon4"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ticket"
+                    android:tint="#9C27B0"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Количество билетов справа -->
+                <TextView
+                    android:id="@+id/tvCount4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 шт."
+                    android:textColor="#E9E7E7"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Номер автобуса (первая строка) -->
+                <TextView
+                    android:id="@+id/tvBusNumber4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="Автобус №101"
+                    android:textColor="#E9E7E7"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tvCount4"
+                    app:layout_constraintStart_toEndOf="@id/ivTicketIcon4"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Время покупки (вторая строка) -->
+                <TextView
+                    android:id="@+id/tvPurchaseTime4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="18:15 25.12.2023"
+                    android:textColor="#E9E7E7"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tvCount4"
+                    app:layout_constraintStart_toEndOf="@id/ivTicketIcon4"
+                    app:layout_constraintTop_toBottomOf="@id/tvBusNumber4" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- БИЛЕТ 5 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ticket5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="8dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="3dp"
+            app:layout_constraintBottom_toTopOf="@id/guideline_ticket5_bottom"
+            app:layout_constraintEnd_toStartOf="@id/guideline_85"
+            app:layout_constraintStart_toStartOf="@id/guideline_5"
+            app:layout_constraintTop_toTopOf="@id/guideline_ticket5_top">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_input_code"
+                android:padding="12dp">
+
+                <!-- Иконка билета слева -->
+                <ImageView
+                    android:id="@+id/ivTicketIcon5"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ticket"
+                    android:tint="#9C27B0"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Количество билетов справа -->
+                <TextView
+                    android:id="@+id/tvCount5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 шт."
+                    android:textColor="#E9E7E7"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Номер автобуса (первая строка) -->
+                <TextView
+                    android:id="@+id/tvBusNumber5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="Автобус №112"
+                    android:textColor="#E9E7E7"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tvCount5"
+                    app:layout_constraintStart_toEndOf="@id/ivTicketIcon5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Время покупки (вторая строка) -->
+                <TextView
+                    android:id="@+id/tvPurchaseTime5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="20:30 25.12.2023"
+                    android:textColor="#E9E7E7"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tvCount5"
+                    app:layout_constraintStart_toEndOf="@id/ivTicketIcon5"
+                    app:layout_constraintTop_toBottomOf="@id/tvBusNumber5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
