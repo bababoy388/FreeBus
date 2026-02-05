@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/upper_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/upper_menu" />
+
+    <!-- Первая строка -->
+    <ImageView
+        android:id="@+id/icon1"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/settings_icon"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/upper_menu" />
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Настройки"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/white"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toEndOf="@id/icon1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/icon1"
+        app:layout_constraintBottom_toBottomOf="@id/icon1" />
+
+    <!-- Вторая строка -->
+    <ImageView
+        android:id="@+id/icon2"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/about_info_icon"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/icon1" />
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="О приложении"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/white"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toEndOf="@id/icon2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/icon2"
+        app:layout_constraintBottom_toBottomOf="@id/icon2" />
+
+    <!-- Третья строка -->
+    <ImageView
+        android:id="@+id/icon3"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/rules_icon"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/icon2" />
+
+    <TextView
+        android:id="@+id/text3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Пользовательское соглашение"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toEndOf="@id/icon3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/icon3"
+        app:layout_constraintBottom_toBottomOf="@id/icon3" />
+
+    <!-- Четвертая строка -->
+    <ImageView
+        android:id="@+id/icon4"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/exit_icon"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/icon3" />
+
+    <TextView
+        android:id="@+id/text4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Выйти"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toEndOf="@id/icon4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/icon4"
+        app:layout_constraintBottom_toBottomOf="@id/icon4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

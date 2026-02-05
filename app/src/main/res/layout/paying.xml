@@ -28,6 +28,13 @@
             app:layout_constraintGuide_percent="0.01" />
 
         <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.08" />
+
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_85"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,76 +47,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.15" />
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="32dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_ticket1_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
+            app:layout_constraintGuide_percent="0.20" />
 
-        <!-- Guideline для второго билета -->
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_ticket2_top"
+        <TextView
+            android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.30" />
+            android:text="Ваши способы оплаты"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@id/guideline_2"
+            app:layout_constraintTop_toTopOf="@id/guideline_text" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_ticket2_bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.40" />
-
-        <!-- Guideline для третьего билета -->
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_ticket3_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.45" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_ticket3_bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.55" />
-
-        <!-- Guideline для четвертого билета -->
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_ticket4_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.60" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_ticket4_bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.70" />
-
-        <!-- Guideline для пятого билета -->
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_ticket5_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.75" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_ticket5_bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.85" />
-
-        <!-- БИЛЕТ 1 -->
         <androidx.cardview.widget.CardView
             android:id="@+id/ticket1"
             android:layout_width="0dp"
@@ -123,16 +86,6 @@
             app:layout_constraintStart_toStartOf="@id/guideline_5"
             app:layout_constraintTop_toTopOf="@id/guideline_ticket1_top">
 
-            <TextView
-                android:id="@+id/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ваши способы оплаты"
-                android:textColor="#E9E7E7"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -142,34 +95,37 @@
                 <!-- Иконка билета слева -->
                 <ImageView
                     android:id="@+id/ivTicketIcon1"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="49dp"
+                    android:layout_height="49dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/orig"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- Количество билетов справа -->
                 <ImageView
                     android:id="@+id/tvCount1"
-                    android:layout_width="39dp"
-                    android:layout_height="32dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="4dp"
                     android:src="@drawable/sbp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
-                <!-- Номер автобуса (первая строка) -->
                 <TextView
                     android:id="@+id/tvBusNumber1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="240dp"
+                    android:layout_height="28dp"
                     android:maxLines="1"
                     android:text="Сбербанк"
                     android:textColor="#E9E7E7"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tvCount1"
+                    app:layout_constraintHorizontal_bias="0.304"
                     app:layout_constraintStart_toEndOf="@id/ivTicketIcon1"
                     app:layout_constraintTop_toTopOf="parent" />
 

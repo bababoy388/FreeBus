@@ -41,12 +41,6 @@
             app:layout_constraintGuide_percent="0.95" />
 
         <!-- ГОРИЗОНТАЛЬНЫЕ Guidelines ДЛЯ 5 БИЛЕТОВ -->
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_top_10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.009" />
 
         <!-- Guideline для первого билета -->
         <androidx.constraintlayout.widget.Guideline
@@ -54,14 +48,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.15" />
+            app:layout_constraintGuide_percent="0.05" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_ticket1_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
+            app:layout_constraintGuide_percent="0.15" />
 
         <!-- Guideline для второго билета -->
         <androidx.constraintlayout.widget.Guideline
@@ -69,14 +63,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.30" />
+            app:layout_constraintGuide_percent="0.18" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_ticket2_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.40" />
+            app:layout_constraintGuide_percent="0.28" />
 
         <!-- Guideline для третьего билета -->
         <androidx.constraintlayout.widget.Guideline
@@ -84,14 +78,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.45" />
+            app:layout_constraintGuide_percent="0.31" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_ticket3_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.55" />
+            app:layout_constraintGuide_percent="0.41" />
 
         <!-- Guideline для четвертого билета -->
         <androidx.constraintlayout.widget.Guideline
@@ -99,14 +93,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.60" />
+            app:layout_constraintGuide_percent="0.44" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_ticket4_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.70" />
+            app:layout_constraintGuide_percent="0.54" />
 
         <!-- Guideline для пятого билета -->
         <androidx.constraintlayout.widget.Guideline
@@ -114,14 +108,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.75" />
+            app:layout_constraintGuide_percent="0.57" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_ticket5_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.85" />
+            app:layout_constraintGuide_percent="0.67" />
 
         <!-- БИЛЕТ 1 -->
         <androidx.cardview.widget.CardView
@@ -149,8 +143,8 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ticket"
-                    android:tint="#9C27B0"
+                    android:src="@drawable/ticket_info_icon"
+                    android:tint="#BF8AFD"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -172,7 +166,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="Автобус №123"
+                    android:text="Автобус №85"
                     android:textColor="#E9E7E7"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -185,8 +179,8 @@
                     android:id="@+id/tvPurchaseTime1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="12:30 25.12.2023"
-                    android:textColor="#E9E7E7"
+                    android:text="06:28:54"
+                    android:textColor="#BFBFBF"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tvCount1"
@@ -222,8 +216,8 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ticket"
-                    android:tint="#9C27B0"
+                    android:src="@drawable/ticket_info_icon"
+                    android:tint="#BF8AFD"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -240,26 +234,29 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- Номер автобуса (первая строка) -->
+
+                <!-- Время покупки (вторая строка) -->
+
                 <TextView
                     android:id="@+id/tvBusNumber2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="Автобус №456"
+                    android:text="Автобус №85"
                     android:textColor="#E9E7E7"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@id/tvCount2"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@id/ivTicketIcon2"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- Время покупки (вторая строка) -->
                 <TextView
                     android:id="@+id/tvPurchaseTime2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="14:45 25.12.2023"
-                    android:textColor="#E9E7E7"
+                    android:text="06:43:34"
+                    android:textColor="#BFBFBF"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tvCount2"
@@ -295,8 +292,8 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ticket"
-                    android:tint="#9C27B0"
+                    android:src="@drawable/ticket_info_icon"
+                    android:tint="#BF8AFD"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -318,7 +315,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="Автобус №789"
+                    android:text="Автобус №9"
                     android:textColor="#E9E7E7"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -331,8 +328,8 @@
                     android:id="@+id/tvPurchaseTime3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="16:20 25.12.2023"
-                    android:textColor="#E9E7E7"
+                    android:text="18:31:51"
+                    android:textColor="#BFBFBF"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tvCount3"
@@ -368,8 +365,8 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ticket"
-                    android:tint="#9C27B0"
+                    android:src="@drawable/ticket_info_icon"
+                    android:tint="#BF8AFD"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -391,7 +388,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="Автобус №101"
+                    android:text="Автобус №1"
                     android:textColor="#E9E7E7"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -404,8 +401,8 @@
                     android:id="@+id/tvPurchaseTime4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="18:15 25.12.2023"
-                    android:textColor="#E9E7E7"
+                    android:text="13:02:03"
+                    android:textColor="#BFBFBF"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tvCount4"
@@ -441,8 +438,8 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ticket"
-                    android:tint="#9C27B0"
+                    android:src="@drawable/ticket_info_icon"
+                    android:tint="#BF8AFD"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -464,7 +461,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="Автобус №112"
+                    android:text="Автобус №9"
                     android:textColor="#E9E7E7"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -477,8 +474,8 @@
                     android:id="@+id/tvPurchaseTime5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="20:30 25.12.2023"
-                    android:textColor="#E9E7E7"
+                    android:text="21:53:27"
+                    android:textColor="#BFBFBF"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tvCount5"
