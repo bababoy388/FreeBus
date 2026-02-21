@@ -3,6 +3,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="inactive_color">#A2A2A2</color>
-    <color name="active_color">#d76aec</color>
-    <color name="background_input_code">#252222</color>
+    <color name="active_color">#8463df</color>
+    <color name="background_input_code">#1F1F1F</color>
+    <color name="lavande">#c3b9ff</color>
+    <color name="standart_text_color">#eeebfc</color>
 </resources>

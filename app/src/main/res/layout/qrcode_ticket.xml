@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ticket_background_dark"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        android:theme="@style/ToolbarTheme.Pink"
+        app:title="Мой билет"
+        app:titleTextColor="@color/white" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ticketArea"
+        android:layout_width="360dp"
+        android:layout_height="470dp"
+        android:background="@drawable/qr"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintDimensionRatio="2:3">
+
+        <TextView
+            android:id="@+id/minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="45"
+            android:textColor="@color/standart_text_color"
+            android:textSize="55dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.164"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/seconds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="45"
+            android:textColor="@color/standart_text_color"
+            android:textSize="55dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.795"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/minutesText"
+            android:layout_width="64dp"
+            android:layout_height="21dp"
+            android:layout_marginTop="88dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Минуты"
+            android:textColor="@color/inactive_color"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.165"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/secondsText"
+            android:layout_width="64dp"
+            android:layout_height="21dp"
+            android:layout_marginTop="88dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Секунды"
+            android:textColor="@color/inactive_color"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.793"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ticketNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="140dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Билет - №8341"
+            android:textColor="@color/standart_text_color"
+            android:textSize="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/helpText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="340dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Назовите код для проверки"
+            android:textColor="@color/standart_text_color"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/generalNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="7518"
+            android:textColor="@color/active_color"
+            android:textSize="42dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

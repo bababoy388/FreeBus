@@ -2,8 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/logo"
@@ -11,21 +18,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NewFreeBus">
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/Theme.NewFreeBus"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
+
+    <activity
+        android:name=".MainActivity"
+        android:exported="false" />
+
+        <activity
+            android:name=".Authorization"
+            android:exported="false" />
+
+        <activity android:name=".QrScanner"
+            android:exported="false">
+        </activity>
+
         <activity
             android:name=".IncorrectCodeActivity"
             android:exported="false" />
-    </application>
+        <activity android:name=".BuyTicket" />
+        <activity android:name=".PreBuyTicket" />
+        <activity android:name=".QrTicket" />
+</application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-</manifest>
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    </manifest>

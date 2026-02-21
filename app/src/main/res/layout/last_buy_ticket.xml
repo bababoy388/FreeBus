@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/buy_ticket"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:title="Покупка билета"
+        app:titleTextColor="@color/standart_text_color"
+        android:theme="@style/ToolbarTheme.Pink" />
+
+    <!-- Первая карточка с информацией о билете -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ticketInfoCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardBackgroundColor="#540D0D"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_input_code"
+            android:padding="12dp">
+
+            <ImageView
+                android:id="@+id/ivTicketIcon1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ticket_info_icon"
+                android:tint="@color/lavande"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvCount1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 шт"
+                android:textColor="#E9E7E7"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvBusNumber1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="Автобус №85"
+                android:textColor="@color/standart_text_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/tvCount1"
+                app:layout_constraintStart_toEndOf="@id/ivTicketIcon1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvPurchaseTime1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="06:28:54"
+                android:textColor="#BFBFBF"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tvCount1"
+                app:layout_constraintStart_toEndOf="@id/ivTicketIcon1"
+                app:layout_constraintTop_toBottomOf="@id/tvBusNumber1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Заголовок способов оплаты -->
+    <TextView
+        android:id="@+id/paymentMethodsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="56dp"
+        android:text="Ваши способы оплаты"
+        android:textColor="@color/standart_text_color"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ticketInfoCard" />
+
+    <!-- Карточка способа оплаты -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/paymentMethodCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentMethodsTitle">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_input_code"
+            android:padding="12dp">
+
+            <!-- Карточка для иконки Сбера -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/sberCard"
+                android:layout_width="41dp"
+                android:layout_height="41dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/sber" />
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Иконка СБП -->
+            <ImageView
+                android:id="@+id/sbpIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/sbp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Название банка -->
+            <TextView
+                android:id="@+id/bankName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="Сбербанк"
+                android:textColor="@color/standart_text_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/sbpIcon"
+                app:layout_constraintStart_toEndOf="@id/sberCard"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Кнопка оплаты -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/nextButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:minHeight="49dp"
+        android:text="ОПЛАТИТЬ 48 ₽"
+        android:textColor="@color/standart_text_color"
+        app:backgroundTint="@null"
+        android:background="@drawable/gradient_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

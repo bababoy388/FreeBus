@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="Некорректный код"
-            android:textColor="@color/white"
+            android:textColor="@color/standart_text_color"
             android:textSize="22sp" />
 
         <TextView
@@ -55,7 +55,7 @@
         android:background="@drawable/gradient_button"
         android:minHeight="49dp"
         android:text="НАЗАД"
-        android:textColor="@color/white"
+        android:textColor="@color/standart_text_color"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

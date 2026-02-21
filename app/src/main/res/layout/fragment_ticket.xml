@@ -14,7 +14,7 @@
         android:orientation="vertical"
         android:visibility="visible"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/buyButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="Нет действующего билета"
-            android:textColor="@color/white"
+            android:textColor="@color/standart_text_color"
             android:textSize="22sp" />
 
         <TextView
@@ -38,13 +38,13 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Для покупки билета нажмите\n кнопку внизу экрана"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textColor="@color/inactive_color"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <!-- Кнопка покупки -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button"
+        android:id="@+id/buyButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -53,11 +53,57 @@
         android:background="@drawable/gradient_button"
         android:minHeight="49dp"
         android:text="КУПИТЬ БИЛЕТ"
-        android:textColor="@color/white"
+        android:textColor="@color/standart_text_color"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/buttonsContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Кнопка "Предъявить" -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/showButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="49dp"
+            android:text="ПРЕДЪЯВИТЬ"
+            android:textColor="@color/background_input_code"
+            android:background="@drawable/predyabit"
+            app:backgroundTint="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/buyButtonTwo"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Кнопка "Купить билет" -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buyButtonTwo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/gradient_button"
+            android:minHeight="49dp"
+            android:text="КУПИТЬ БИЛЕТ"
+            android:textColor="@color/standart_text_color"
+            app:backgroundTint="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/showButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Контейнер для билета -->
     <FrameLayout

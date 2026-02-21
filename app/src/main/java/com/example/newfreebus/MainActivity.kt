@@ -1,13 +1,16 @@
 package com.example.newfreebus
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.activity.enableEdgeToEdge
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -16,9 +19,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        enableEdgeToEdge()
+        window.statusBarColor = android.graphics.Color.parseColor("#40000000")
+        window.navigationBarColor = Color.BLACK
+
+        val toolbarr = findViewById<Toolbar>(R.id.toolbar)
+        ViewCompat.setOnApplyWindowInsetsListener(toolbarr) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            val params = v.layoutParams as ViewGroup.MarginLayoutParams
+            params.topMargin = systemBars.top
+            v.layoutParams = params
             insets
         }
 

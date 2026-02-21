@@ -15,8 +15,15 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.example.newfreebus.data.model.Bus
+import com.example.newfreebus.data.remote.RetrofitClient
 import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -26,17 +33,18 @@ class TicketFragment : Fragment() {
     private lateinit var noTicketLayout: LinearLayout
     private lateinit var ticketContainer: FrameLayout
     private lateinit var buyButton: MaterialButton
+    private lateinit var buyButtonTwo: MaterialButton
+    private lateinit var showButton: MaterialButton
+    private lateinit var buttonsContainer: ConstraintLayout
     private var countDownTimer: CountDownTimer? = null
 
-    // SharedPreferences для сохранения состояния
     private lateinit var sharedPreferences: SharedPreferences
 
     companion object {
         private const val PREFS_NAME = "TicketPrefs"
         private const val KEY_TICKET_CODE = "ticket_code"
-        private const val KEY_TICKET_TIME = "ticket_time" // Время покупки
+        private const val KEY_TICKET_TIME = "ticket_time"
 
-        // Маршруты - объединяем в один companion object
         val routes = mapOf(
             "1" to Triple("МП \"Городской транспорт\"", "Тихие Зори → Ст.Красноярск-Сев", "1 билет - 46₽"),
             "2" to Triple("ООО \"Экипаж-ГО\"", "Автовокз.Вост → Дом Учёных", "1 билет - 48₽"),
@@ -92,9 +100,7 @@ class TicketFragment : Fragment() {
             "99" to Triple("ООО \"СТК\"", "Ст.Кр-ск-Сев → ул.Цимлянская", "1 билет - 48₽")
         )
 
-        fun getRouteById(id: String): Triple<String, String, String>? {
-            return routes[id]
-        }
+        fun getRouteById(id: String): Triple<String, String, String>? = routes[id]
     }
 
     override fun onCreateView(
@@ -102,9 +108,7 @@ class TicketFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Инициализируем SharedPreferences
         sharedPreferences = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-
         return inflater.inflate(R.layout.fragment_ticket, container, false)
     }
 
@@ -113,180 +117,210 @@ class TicketFragment : Fragment() {
 
         noTicketLayout = view.findViewById(R.id.noTicketLayout)
         ticketContainer = view.findViewById(R.id.ticketContainer)
-        buyButton = view.findViewById(R.id.button)
+        buyButton = view.findViewById(R.id.buyButton)
+        buyButtonTwo = view.findViewById(R.id.buyButtonTwo)
+        showButton = view.findViewById(R.id.showButton)
+        buttonsContainer = view.findViewById(R.id.buttonsContainer)
 
-        buyButton.setOnClickListener {
-            showSimpleDialog()
+        buttonsContainer.visibility = View.GONE
+        buyButton.visibility = View.VISIBLE
+
+        buyButton.setOnClickListener { showSimpleDialog() }
+        buyButtonTwo.setOnClickListener { showSimpleDialog() }
+
+        showButton.setOnClickListener {
+            if (TimerManager.hasActiveTimer(requireContext())) {
+                startActivity(Intent(requireContext(), QrTicket::class.java))
+            } else {
+                Toast.makeText(requireContext(), "Нет активного билета", Toast.LENGTH_SHORT).show()
+            }
         }
 
-        // Восстанавливаем билет при создании фрагмента
         restoreTicket()
     }
 
     private fun restoreTicket() {
-        // Пытаемся восстановить сохраненный билет
         val savedTicketCode = sharedPreferences.getString(KEY_TICKET_CODE, null)
         val savedTicketTime = sharedPreferences.getLong(KEY_TICKET_TIME, 0)
 
         if (savedTicketCode != null && savedTicketTime > 0) {
-            val currentTime = System.currentTimeMillis()
-            val elapsedTime = currentTime - savedTicketTime
-            val ticketDuration = 45 * 60 * 1000L // 45 минут в миллисекундах
-
-            if (elapsedTime < ticketDuration) {
-                // Билет еще действителен
-                val remainingTime = ticketDuration - elapsedTime
-                showTicket(savedTicketCode, remainingTime, false)
+            val elapsed = System.currentTimeMillis() - savedTicketTime
+            val ticketDuration = 45 * 60 * 1000L
+            if (elapsed < ticketDuration) {
+                processTicketInput(savedTicketCode, ticketDuration - elapsed, false)
             } else {
-                // Билет истек
                 clearTicket()
+            }
+        } else if (TimerManager.hasActiveTimer(requireContext())) {
+            val remaining = TimerManager.getRemainingTime(requireContext())
+            if (remaining > 0) {
+                processTicketInput(TimerManager.getTimerState(requireContext()).ticketCode, remaining, false)
+            } else {
+                TimerManager.clearTimer(requireContext())
             }
         }
     }
 
     private fun showSimpleDialog() {
-        val dialog = Dialog(requireContext())
-        dialog.setContentView(R.layout.code_input)
+        Dialog(requireContext()).apply {
+            setContentView(R.layout.code_input)
+            window?.setLayout((resources.displayMetrics.widthPixels * 0.9).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
+            window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-        val width = (resources.displayMetrics.widthPixels * 0.9).toInt()
-        val height = ViewGroup.LayoutParams.WRAP_CONTENT
-        dialog.window?.setLayout(width, height)
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            val editText = findViewById<EditText>(R.id.editTextCode)
+            val submit = findViewById<TextView>(R.id.buttonSubmit)
+            val cancel = findViewById<TextView>(R.id.buttonBack)
+            val qr = findViewById<TextView>(R.id.qrButton)
 
-        val editText = dialog.findViewById<EditText>(R.id.editTextCode)
-        val submitButton = dialog.findViewById<TextView>(R.id.buttonSubmit)
-
-        submitButton.setOnClickListener {
-            val code = editText.text.toString().trim()
-
-            if (code.isNotEmpty()) {
-                showTicket(code, 45 * 60 * 1000L, true)
-                dialog.dismiss()
-            } else {
-                Toast.makeText(requireContext(), "Введите номер автобуса и маршрута", Toast.LENGTH_SHORT).show()
+            qr.setOnClickListener {
+                startActivity(Intent(requireContext(), QrScanner::class.java))
+                dismiss()
             }
-        }
-        dialog.show()
-    }
 
-    private fun showTicket(code: String, durationMillis: Long, saveToPrefs: Boolean) {
-        countDownTimer?.cancel()
-
-        val parts = code.split(" ")
-        if (parts.size < 2) {
-            val intent = Intent(requireContext(), IncorrectCodeActivity::class.java)
-            startActivity(intent)
-            return
-        }
-        val routeId = parts[0]
-        val routeNumber = parts[1]
-
-        // Используем getRouteById из companion object
-        val route = getRouteById(routeId)
-
-        if (route == null) {
-            val intent = Intent(requireContext(), IncorrectCodeActivity::class.java)
-            startActivity(intent)
-            return
-        }
-
-        val calendar = Calendar.getInstance()
-        val currentDate = calendar.time
-
-        val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-        val formattedTime = timeFormat.format(currentDate)
-
-        val dateFormat = SimpleDateFormat("d MMMM", Locale.getDefault())
-        val formattedDate = dateFormat.format(currentDate)
-
-        // Скрываем только сообщение "Нет билета"
-        noTicketLayout.visibility = View.GONE
-        ticketContainer.visibility = View.VISIBLE
-        ticketContainer.removeAllViews()
-
-        val ticketView = layoutInflater.inflate(R.layout.ticket, null)
-
-        val timeText = ticketView.findViewById<TextView>(R.id.timeText)
-        val dateText = ticketView.findViewById<TextView>(R.id.dateText)
-        val routeNumberTicket = ticketView.findViewById<TextView>(R.id.routeNumber)
-        val busNumberTicket = ticketView.findViewById<TextView>(R.id.busNumber)
-        val routeText = ticketView.findViewById<TextView>(R.id.routeText)
-        val minutesText = ticketView.findViewById<TextView>(R.id.minutesText)
-        val secondsText = ticketView.findViewById<TextView>(R.id.secondsText)
-        val companyText = ticketView.findViewById<TextView>(R.id.companyText)
-        val priceText = ticketView.findViewById<TextView>(R.id.priceText)
-
-        timeText.text = formattedTime
-        dateText.text = formattedDate
-        routeText.text = route.second
-        routeNumberTicket.text = "№$routeId"
-        busNumberTicket.text = routeNumber
-        companyText.text = route.first
-        priceText.text = route.third
-
-        // Сохраняем билет в SharedPreferences если нужно
-        if (saveToPrefs) {
-            saveTicketCode(code)
-        }
-
-        // Запускаем таймер
-        startCountDownTimer(minutesText, secondsText, durationMillis)
-
-        ticketContainer.addView(ticketView)
-    }
-
-    private fun startCountDownTimer(minutesText: TextView, secondsText: TextView, durationMillis: Long) {
-        // Рассчитываем начальные значения
-        val initialMinutes = durationMillis / 1000 / 60
-        val initialSeconds = (durationMillis / 1000) % 60
-
-        minutesText.text = initialMinutes.toString()
-        secondsText.text = String.format("%02d", initialSeconds)
-
-        countDownTimer = object : CountDownTimer(durationMillis, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                val minutes = millisUntilFinished / 1000 / 60
-                val seconds = (millisUntilFinished / 1000) % 60
-
-                minutesText.text = minutes.toString()
-                secondsText.text = String.format("%02d", seconds)
-
-                if (minutes < 5) {
-                    minutesText.setTextColor(Color.RED)
-                    secondsText.setTextColor(Color.RED)
+            submit.setOnClickListener {
+                val input = editText.text.toString().trim()
+                if (input.isNotEmpty()) {
+                    processTicketInput(input, 45 * 60 * 1000L, true)
+                    dismiss()
                 } else {
-                    minutesText.setTextColor(Color.WHITE)
-                    secondsText.setTextColor(Color.WHITE)
+                    Toast.makeText(requireContext(), "Введите номер автобуса и маршрута", Toast.LENGTH_SHORT).show()
                 }
             }
 
+            cancel.setOnClickListener { dismiss() }
+            show()
+        }
+    }
+
+    private fun processTicketInput(input: String, durationMillis: Long, saveToPrefs: Boolean) {
+        if (input.contains(" ")) {
+            val parts = input.split(" ", limit = 2)
+            val routeId = parts[0]
+            val busNumber = parts[1]
+            val route = getRouteById(routeId)
+            if (route != null) {
+                showLocalTicket(routeId, busNumber, route, durationMillis, saveToPrefs)
+            } else {
+                Toast.makeText(requireContext(), "Маршрут с номером $routeId не найден", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            try {
+                fetchAndShowTicket(input.toInt(), durationMillis, saveToPrefs)
+            } catch (e: NumberFormatException) {
+                Toast.makeText(requireContext(), "Введите число или номер маршрута и номер автобуса через пробел", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun fetchAndShowTicket(code: Int, durationMillis: Long, saveToPrefs: Boolean) {
+        lifecycleScope.launch {
+            try {
+                val bus = withContext(Dispatchers.IO) { RetrofitClient.apiService.getBuses(code) }
+                if (isAdded) {
+                    displayTicket(bus, code.toString(), durationMillis, saveToPrefs)
+                }
+            } catch (e: Exception) {
+                if (isAdded) {
+                    Toast.makeText(requireContext(), "Ошибка загрузки: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun displayTicket(bus: Bus, code: String, durationMillis: Long, saveToPrefs: Boolean) {
+        countDownTimer?.cancel()
+        val now = Calendar.getInstance()
+        val time = SimpleDateFormat("HH:mm", Locale.getDefault()).format(now.time)
+        val date = SimpleDateFormat("d MMMM", Locale.getDefault()).format(now.time)
+
+        noTicketLayout.visibility = View.GONE
+        ticketContainer.visibility = View.VISIBLE
+        buttonsContainer.visibility = View.VISIBLE
+        buyButton.visibility = View.GONE
+        ticketContainer.removeAllViews()
+
+        layoutInflater.inflate(R.layout.ticket, ticketContainer, true).apply {
+            findViewById<TextView>(R.id.timeText).text = time
+            findViewById<TextView>(R.id.dateText).text = date
+            findViewById<TextView>(R.id.routeNumber).text = bus.routerNumber.toString()
+            findViewById<TextView>(R.id.busNumber).text = bus.busNumber
+            findViewById<TextView>(R.id.routeText).text = bus.router
+            findViewById<TextView>(R.id.companyText).text = bus.company
+            findViewById<TextView>(R.id.priceText).text = bus.price
+
+            TimerManager.saveTimerState(requireContext(), System.currentTimeMillis(), durationMillis, code, bus.routerNumber.toString(), bus.busNumber)
+            if (saveToPrefs) saveTicketCode(code)
+
+            startCountDownTimer(findViewById(R.id.minutesText), findViewById(R.id.secondsText), durationMillis)
+        }
+    }
+
+    private fun showLocalTicket(routeId: String, busNumber: String, route: Triple<String, String, String>, durationMillis: Long, saveToPrefs: Boolean) {
+        countDownTimer?.cancel()
+        val now = Calendar.getInstance()
+        val time = SimpleDateFormat("HH:mm", Locale.getDefault()).format(now.time)
+        val date = SimpleDateFormat("d MMMM", Locale.getDefault()).format(now.time)
+
+        noTicketLayout.visibility = View.GONE
+        ticketContainer.visibility = View.VISIBLE
+        buttonsContainer.visibility = View.VISIBLE
+        buyButton.visibility = View.GONE
+        ticketContainer.removeAllViews()
+
+        layoutInflater.inflate(R.layout.ticket, ticketContainer, true).apply {
+            findViewById<TextView>(R.id.timeText).text = time
+            findViewById<TextView>(R.id.dateText).text = date
+            findViewById<TextView>(R.id.routeNumber).text = routeId
+            findViewById<TextView>(R.id.busNumber).text = busNumber
+            findViewById<TextView>(R.id.routeText).text = route.second
+            findViewById<TextView>(R.id.companyText).text = route.first
+            findViewById<TextView>(R.id.priceText).text = route.third
+
+            val code = "$routeId $busNumber"
+            TimerManager.saveTimerState(requireContext(), System.currentTimeMillis(), durationMillis, code, routeId, busNumber)
+            if (saveToPrefs) saveTicketCode(code)
+
+            startCountDownTimer(findViewById(R.id.minutesText), findViewById(R.id.secondsText), durationMillis)
+        }
+    }
+
+    private fun startCountDownTimer(minutesText: TextView, secondsText: TextView, durationMillis: Long) {
+        val remaining = TimerManager.getRemainingTime(requireContext()).takeIf { it > 0 } ?: durationMillis
+        minutesText.text = (remaining / 1000 / 60).toString()
+        secondsText.text = String.format("%02d", (remaining / 1000) % 60)
+
+        countDownTimer = object : CountDownTimer(remaining, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                minutesText.text = (millisUntilFinished / 1000 / 60).toString()
+                secondsText.text = String.format("%02d", (millisUntilFinished / 1000) % 60)
+            }
             override fun onFinish() {
                 minutesText.text = "0"
                 secondsText.text = "00"
                 minutesText.setTextColor(Color.RED)
                 secondsText.setTextColor(Color.RED)
-
-                // Очищаем билет при истечении времени
                 clearTicket()
             }
         }.start()
     }
 
     private fun saveTicketCode(code: String) {
-        val editor = sharedPreferences.edit()
-        editor.putString(KEY_TICKET_CODE, code)
-        editor.putLong(KEY_TICKET_TIME, System.currentTimeMillis()) // Сохраняем текущее время
-        editor.apply()
+        sharedPreferences.edit().apply {
+            putString(KEY_TICKET_CODE, code)
+            putLong(KEY_TICKET_TIME, System.currentTimeMillis())
+            apply()
+        }
     }
 
     private fun clearTicket() {
-        // Очищаем SharedPreferences
-        val editor = sharedPreferences.edit()
-        editor.remove(KEY_TICKET_CODE)
-        editor.remove(KEY_TICKET_TIME)
-        editor.apply()
-
-        // Очищаем UI
+        sharedPreferences.edit().apply {
+            remove(KEY_TICKET_CODE)
+            remove(KEY_TICKET_TIME)
+            apply()
+        }
+        TimerManager.clearTimer(requireContext())
+        buttonsContainer.visibility = View.GONE
+        buyButton.visibility = View.VISIBLE
         ticketContainer.visibility = View.GONE
         noTicketLayout.visibility = View.VISIBLE
         ticketContainer.removeAllViews()

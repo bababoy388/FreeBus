@@ -9,5 +9,4 @@
     <style name="ToolbarTheme.Pink" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorControlNormal">@color/active_color</item>
     </style>
-
 </resources>
